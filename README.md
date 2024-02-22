@@ -70,6 +70,8 @@ theta = y + dtheta
 
 ### Pure Pursuit and Virtual Force Field (VFF)
 
+pseudocode
+
 ```
 function pure_pursuit_controller:
         if lidar_scan != None:
@@ -97,7 +99,7 @@ function get_vff:
         min_index = argmin(lidar_scan)
         min_distance = lidar_scan[min_index]
         if min_distance < OBSTACLE_DISTANCE:
-                angle = lidar_scan_min_angle + (lidar_scan_increment * min_index)
+                angle = lidar_scan_min_angle + (lidar_scan_incremental * min_index)
                 opposite_angle = angle + pi
                 complementary_distance = OBSTACLE_DISTANCE - min_distance
                 vff_vector['repulsive'][0] = cos(opposite_angle) * complementary_distance
