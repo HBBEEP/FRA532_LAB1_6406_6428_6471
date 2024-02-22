@@ -87,8 +87,8 @@ function calculate_goal_point:
                 index += 1
                 target_point = path[index]
                 distance_between_target = sqrt((target_point[x]-robot_pose[x])**2 + (target_point[y]-robot_pose[y])**2))
-        return index
         end
+        return index
 
 function get_vff:
         target_x = path[index].x - robot_position.x
