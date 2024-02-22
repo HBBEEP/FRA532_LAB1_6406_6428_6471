@@ -192,6 +192,10 @@ ros2 launch multi_turtlebot_sim spawn_testcase_3.launch.py
 Result:
 
 
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/9ac3a43e-8141-4e04-a7a1-96f678296e18
+
+
+
 Test Case 4: 1 Dynamics Obstacle
 
 ```
@@ -216,12 +220,6 @@ ros2 launch multi_turtlebot_sim spawn_testcase_6.launch.py
 Result:
 
 
-Test Case 7: 2 Dynamics Obstacles with increase speed
-
-```
-ros2 launch multi_turtlebot_sim spawn_testcase_7.launch.py
-```
-Result:
 
 
 ### Conclusion
