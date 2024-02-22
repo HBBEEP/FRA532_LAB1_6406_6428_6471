@@ -15,8 +15,11 @@ This LAB is part of the FRA532 Mobile Robot course for third-year students at th
 
 ## Diagram
 
+![Mobile Lab1 drawio](https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/8dd7d7ec-869e-4868-9dc4-0bd8894c86ce)
+
 ## Forward_Kinematics
 
+for convert wheel velocity to robot twist (linear velocity, angular velocity)
 
 ```
 
@@ -29,6 +32,7 @@ This LAB is part of the FRA532 Mobile Robot course for third-year students at th
 
 ## Inverse_Kinematics
 
+for convert robot twist (linear velocity, angular velocity) to wheel velocity
 
 ```
 
@@ -55,13 +59,27 @@ w_l_wheel is angular velocity of robot's left wheel
 
 ## Wheel Odometry
 
-```
-
-        [ w_r_wheel ]  = [ 1/r  B/2r ][ v_robot ]
-        [ w_l_wheel ]    [ 1/r -B/2r ][ w_robot ]
-
+to get the robot's position
 
 ```
+dx = linear_velocity * cos(theta) * dt
+dy = linear_velocity * sin(theta) * dt
+dthata = angular_velocity * dt
+
+x = x + dx
+y = y + dx
+theta = y + dtheta
+```
+
+## Controller: Pure Pursuit and Virtual Force Field (VFF) Algorithm
+
+### Pure Pursuit
+
+```
+
+
+```
+
 ## Installation
 
 Step 1: Clone the repository to the src directory of your workspace. You must unzip and put each folder in the src directory.
