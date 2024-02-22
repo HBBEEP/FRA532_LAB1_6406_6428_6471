@@ -6,12 +6,13 @@ This LAB is part of the FRA532 Mobile Robot course for third-year students at th
 
 - [Diagram](#Diagram)
 - [Forward Kinematics](#Forward_Kinematics)
-- [Inverse Kinematics]()
-- [Wheel Odometry]()
-- [Installation]()
-- [Usage]()
-- [Experiment]()
-- [Our Team]()
+- [Inverse Kinematics](#Inverse_Kinematics)
+- [Wheel_Odometry](#Wheel_Odometry)
+- [Controller](#Controller)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Experiment](#Experiment)
+- [Our_Team](#Our_Team)
 
 ## Diagram
 
@@ -51,7 +52,7 @@ w_r_wheel is angular velocity of robot's right wheel
 w_l_wheel is angular velocity of robot's left wheel
 
 
-## Wheel Odometry
+## Wheel_Odometry
 
 to get the robot's position
 
@@ -65,7 +66,9 @@ y = y + dx
 theta = y + dtheta
 ```
 
-## Controller: Pure Pursuit and Virtual Force Field (VFF) Algorithm
+## Controller
+
+Pure Pursuit and Virtual Force Field (VFF) Algorithm
 
 ### Pure Pursuit
 
