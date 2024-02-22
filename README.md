@@ -192,7 +192,8 @@ ros2 launch multi_turtlebot_sim spawn_testcase_3.launch.py
 Result:
 
 
-https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/9ac3a43e-8141-4e04-a7a1-96f678296e18
+
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/3b11db1b-949e-449f-a920-d43cb867aac7
 
 
 
