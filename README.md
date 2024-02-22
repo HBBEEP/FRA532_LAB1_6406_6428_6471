@@ -24,7 +24,6 @@ for convert wheel velocity to robot twist (linear velocity, angular velocity)
 ```
         [ v_robot ]  = r * [ 1/2  1/2 ][ w_r_wheel ]
         [ w_robot ]        [ 1/B -1/B ][ w_l_wheel ]
-
 ```
 
 
@@ -35,7 +34,6 @@ for convert robot twist (linear velocity, angular velocity) to wheel velocity
 ```
         [ w_r_wheel ]  = [ 1/r  B/2r ][ v_robot ]
         [ w_l_wheel ]    [ 1/r -B/2r ][ w_robot ]
-
 ```
 
 where
@@ -75,18 +73,42 @@ theta = y + dtheta
 
 
 ```
+### Virtual Force Field (VFF)
+
+```
+
+
+```
 
 ## Installation
 
 Step 1: Clone the repository to the src directory of your workspace. You must unzip and put each folder in the src directory.
 
 ```
-
+cd ~/[your_workspace]/src
+git clone [https://github.com/kkwxnn/self_balancing.git](https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471.git)
+```
+Step 2:  Build "self_balancing" in your workspace.
+```
+cd ~/[your_workspace]
+colcon build 
+source install/setup.bash
 ```
 ## Usage
 
-```
+Run Simulation
 
+Terminal 1: Launch Gazebo
+```
+ros2 launch ur5_ros2_gazebo ur5_simulation.launch.py
+```
+Terminal 2: Launch RVIZ
+```
+ros2 launch carver_navigation vmegarover_navigation.launch.py
+```
+Terminal 3: Run velocity_controller
+```
+ros2 run robot_control velocity_controller.py
 ```
 
 ## Experiment
@@ -96,7 +118,7 @@ Step 1: Clone the repository to the src directory of your workspace. You must un
 ```
 ros2 launch multi_turtlebot_sim spawn_environment.launch.py
 ```
-### Launch Test Case
+### Launch Test Case (Launch before run velocity_controller)
 
 Test Case 1: No Obstacle
 
