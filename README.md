@@ -93,7 +93,7 @@ function calculate_goal_point:
 function get_vff:
         target_x = path[index].x - robot_position.x
         target_y = path[index].y - robot_position.y
-        vff_vector = {'attractive': [target_x , target_y ],  # Goal-directed vector
+        vff_vector = {'attractive': [target_x , target_y],  # Goal-directed vector
                       'repulsive': [0.0, 0.0],  # Obstacle avoidance vector
                       'result': [0.0, 0.0]} # Combined vector
         min_index = argmin(lidar_scan)
