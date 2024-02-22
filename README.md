@@ -68,8 +68,6 @@ theta = y + dtheta
 
 ## Controller
 
-Pure Pursuit and Virtual Force Field (VFF) Algorithm
-
 ### Pure Pursuit
 
 ```
