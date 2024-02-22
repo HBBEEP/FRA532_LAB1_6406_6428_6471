@@ -37,7 +37,7 @@ for convert robot twist (linear velocity, angular velocity) to wheel velocity
         [ w_l_wheel ]    [ 1/r -B/2r ][ w_robot ]
 ```
 
-where
+Where
 
 r is wheel radius
 
@@ -89,7 +89,7 @@ Step 1: Clone the repository to the src directory of your workspace. You must un
 cd ~/[your_workspace]/src
 git clone [https://github.com/kkwxnn/self_balancing.git](https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471.git)
 ```
-Step 2:  Build "self_balancing" in your workspace.
+Step 2:  Build package in your workspace.
 ```
 cd ~/[your_workspace]
 colcon build 
@@ -107,9 +107,9 @@ Terminal 2: Launch RVIZ
 ```
 ros2 launch carver_navigation vmegarover_navigation.launch.py
 ```
-Terminal 3: Run velocity_controller
+Terminal 3: Run global_planner
 ```
-ros2 run robot_control velocity_controller.py
+ros2 run robot_control global_planner.py
 ```
 
 ## Experiment
@@ -126,44 +126,58 @@ Test Case 1: No Obstacle
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_1.launch.py
 ```
+Result:
+
 
 Test Case 2: 1 Static Obstacle
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_2.launch.py
 ```
+Result:
+
 
 Test Case 3: 2 Static Obstacles
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_3.launch.py
 ```
+Result:
+
 
 Test Case 4: 1 Dynamics Obstacle
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_4.launch.py
 ```
+Result:
+
 
 Test Case 5: 1 Dynamics Obstacle with increase speed
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_5.launch.py
 ```
+Result:
+
 
 Test Case 6: 2 Dynamics Obstacles 
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_6.launch.py
 ```
+Result:
+
 
 Test Case 7: 2 Dynamics Obstacles with increase speed
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_7.launch.py
 ```
+Result:
 
-### Result
+
+### Conclusion
 
 
 ## Our Team
