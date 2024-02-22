@@ -22,10 +22,8 @@ This LAB is part of the FRA532 Mobile Robot course for third-year students at th
 for convert wheel velocity to robot twist (linear velocity, angular velocity)
 
 ```
-
         [ v_robot ]  = r * [ 1/2  1/2 ][ w_r_wheel ]
         [ w_robot ]        [ 1/B -1/B ][ w_l_wheel ]
-
 
 ```
 
@@ -35,10 +33,8 @@ for convert wheel velocity to robot twist (linear velocity, angular velocity)
 for convert robot twist (linear velocity, angular velocity) to wheel velocity
 
 ```
-
         [ w_r_wheel ]  = [ 1/r  B/2r ][ v_robot ]
         [ w_l_wheel ]    [ 1/r -B/2r ][ w_robot ]
-
 
 ```
 
