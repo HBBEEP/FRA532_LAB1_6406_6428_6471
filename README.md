@@ -20,7 +20,7 @@ This LAB is part of the FRA532 Mobile Robot course for third-year students at th
 
 ## Forward_Kinematics
 
-for convert wheel velocity to robot twist (linear velocity, angular velocity)
+for converting wheel velocity to robot twist (linear velocity, angular velocity)
 
 ```
         [ v_robot ]  = r * [ 1/2  1/2 ][ w_r_wheel ]
@@ -30,7 +30,7 @@ for convert wheel velocity to robot twist (linear velocity, angular velocity)
 
 ## Inverse_Kinematics
 
-for convert robot twist (linear velocity, angular velocity) to wheel velocity
+for converting robot twist (linear velocity, angular velocity) to wheel velocity
 
 ```
         [ w_r_wheel ]  = [ 1/r  B/2r ][ v_robot ]
@@ -41,15 +41,15 @@ Where
 
 r is wheel radius
 
-B is distance between wheels
+B is the distance between wheels
 
-v_robot is linear velocity of robot
+v_robot is the linear velocity of the robot
 
-w_robot is angular velocity of robot
+w_robot is the angular velocity of the robot
 
-w_r_wheel is angular velocity of robot's right wheel
+w_r_wheel is the angular velocity of the robot's right wheel
 
-w_l_wheel is angular velocity of robot's left wheel
+w_l_wheel is the angular velocity of the robot's left wheel
 
 
 ## Wheel_Odometry
@@ -136,7 +136,7 @@ Step 1: Clone the repository to the src directory of your workspace. You must un
 cd ~/[your_workspace]/src
 git clone [https://github.com/kkwxnn/self_balancing.git](https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471.git)
 ```
-Step 2:  Build package in your workspace.
+Step 2:  Build a package in your workspace.
 ```
 cd ~/[your_workspace]
 colcon build 
@@ -176,12 +176,20 @@ ros2 launch multi_turtlebot_sim spawn_testcase_1.launch.py
 Result:
 
 
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/fab00615-b6be-49f5-ab80-3a923301554b
+
+
+
 Test Case 2: 1 Static Obstacle
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_2.launch.py
 ```
 Result:
+
+
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/c9736a3c-926c-437b-bbec-ebbf5e92eda9
+
 
 
 Test Case 3: 2 Static Obstacles
@@ -205,7 +213,11 @@ ros2 launch multi_turtlebot_sim spawn_testcase_4.launch.py
 Result:
 
 
-Test Case 5: 1 Dynamics Obstacle with increase speed
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/513fcb49-bc87-4d7c-94db-7135342de52f
+
+
+
+Test Case 5: 1 Dynamics Obstacle with increased speed
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_5.launch.py
@@ -220,12 +232,20 @@ ros2 launch multi_turtlebot_sim spawn_testcase_6.launch.py
 ```
 Result:
 
-Test Case 7: 2 Dynamics Obstacles with increase speed
+
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/12c5f501-0a67-44f7-b468-392e740ad8be
+
+
+Test Case 7: 2 Dynamics Obstacles with increased speed
 
 ```
 ros2 launch multi_turtlebot_sim spawn_testcase_7.launch.py
 ```
 Result:
+
+
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/e55e2061-99a4-4c54-bd81-5f1012a8ef56
+
 
 
 
