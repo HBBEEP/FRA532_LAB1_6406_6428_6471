@@ -68,17 +68,61 @@ theta = y + dtheta
 
 ## Controller
 
-### Pure Pursuit
+### Pure Pursuit and Virtual Force Field (VFF)
 
 ```
+function pure_pursuit_controller:
+        if lidar_scan != None:
+                index = calculate_goal_point()
+                vff_vector = get_vff(index)
+                linear_velocity, angular_velocity = calculate_velocities(vff_vector['result'])
+        return linear_velocity, angualr_velocity
 
+function calculate_goal_point:
+        target_point = path[index]
+        distance_between_target = sqrt((target_point[x]-robot_pose[x])**2 + (target_point[y]-robot_pose[y])**2))
+        while distance_between_target < LOOKAHEAD_DISTANCE:
+                index += 1
+                target_point = path[index]
+                distance_between_target = sqrt((target_point[x]-robot_pose[x])**2 + (target_point[y]-robot_pose[y])**2))
+        return index
+        end
 
-```
-### Virtual Force Field (VFF)
+function get_vff:
+        target_x = path[index].x - self_robot.x
+        target_y = path[index].y - self_robot.y
+        vff_vector = {'attractive': [target_x , target_y ],  # Goal-directed vector
+                      'repulsive': [0.0, 0.0],  # Obstacle avoidance vector
+                      'result': [0.0, 0.0]} # Combined vector
+        min_index = argmin(lidar_scan)
+        min_distance = lidar_scan[min_index]
+        if min_distance < OBSTACLE_DISTANCE:
+                angle = lidar_scan_min_angle + (lidar_scan_increment * min_index)
+                opposite_angle = angle + pi
+                complementary_distance = OBSTACLE_DISTANCE - min_distance
+                vff_vector['repulsive'][0] = cos(opposite_angle) * complementary_distance
+                vff_vector['repulsive'][1] = sin(opposite_angle) * complementary_distance
+        end
+        vff_vector['result'][0] = vff_vector['attractive'][0] + vff_vector['repulsive'][0]
+        vff_vector['result'][1] = vff_vector['attractive'][1] + vff_vector['repulsive'][1]
 
-```
+function calculate_velocities:
+        target_x = vff_vector['result'][0]
+        target_y = vff_vector['result'][1]
+        e = atan2(target_y, target_x) - robot_theta
+        angular_velocity = k * atan2(sin(e), cos(e))
 
-
+        if linalgnorm([target_x, target_y]) > GOAL_THRESHOLD:
+                linear_velocity = max_linear_velocity
+                if angular_velocity > max_angular_velocity:
+                        angular_velocity = max_angular_velocity
+                        linear_velocity = 0.0
+                else:
+                        linear_velocity = 0.0
+                        angular_velocity = 0.0
+                end
+        end
+        return linear_velocity, angular_velocity
 ```
 
 ## Installation
