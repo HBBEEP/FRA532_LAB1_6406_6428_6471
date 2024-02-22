@@ -176,7 +176,6 @@ ros2 launch multi_turtlebot_sim spawn_testcase_1.launch.py
 Result:
 
 
-https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/fab00615-b6be-49f5-ab80-3a923301554b
 
 
 
@@ -188,7 +187,6 @@ ros2 launch multi_turtlebot_sim spawn_testcase_2.launch.py
 Result:
 
 
-https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/c9736a3c-926c-437b-bbec-ebbf5e92eda9
 
 
 
@@ -244,8 +242,8 @@ ros2 launch multi_turtlebot_sim spawn_testcase_7.launch.py
 Result:
 
 
-https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/e55e2061-99a4-4c54-bd81-5f1012a8ef56
 
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/421f4964-18a1-46a9-8152-049c9321fffb
 
 
 
