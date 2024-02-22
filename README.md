@@ -190,6 +190,8 @@ Result:
 
 
 
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/888a0add-1839-4174-8c27-c3eb5b57e9fa
+
 
 
 Test Case 3: 2 Static Obstacles
@@ -257,6 +259,13 @@ https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/421f4964-1
 
 ![image](https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/1a9f4ce3-3844-45f5-b0a7-e5ad88245b05)
 
+From the experiment comprising 7 test cases utilizing the Pure Pursuit algorithm combined with VFF, each test case varied in the number and speed of obstacles. 
+
+In test cases 1 to 3, the robot successfully reached the target goal. In test case 3, despite encountering obstacles, the robot still managed to reach the goal. However, upon introducing dynamics by allowing obstacles to move, it was observed that at slightly increased speeds, the algorithm was capable of avoiding collisions. Nonetheless, it still collided with the map's doors and failed to reach the goal. This was likely due to an excessive repulsive vector from the VFF, causing the robot to receive too high a gain when passing through narrow doors.
+
+Furthermore, when the obstacle speeds were increased, the robot couldn't evade them in time, as their speeds surpassed that of the robot. Additionally, the repulsive vector from VFF wasn't sufficient to facilitate timely evasion.
+
+The experiment demonstrates that the Pure Pursuit algorithm struggles to effectively handle dynamic environments. To address this, future development may involve adjusting gain values adaptively based on various obstacle parameters, such as their speeds.
 
 ## Our Team
 
