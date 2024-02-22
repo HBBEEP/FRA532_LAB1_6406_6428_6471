@@ -231,6 +231,9 @@ Result:
 
 ### Conclusion
 
+![image](https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/60091659-6e4a-47f4-a088-edfa4bc68327)
+
+
 
 ## Our Team
 
