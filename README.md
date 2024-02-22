@@ -78,7 +78,7 @@ function pure_pursuit_controller:
                 index = calculate_goal_point()
                 vff_vector = get_vff(index)
                 linear_velocity, angular_velocity = calculate_velocities(vff_vector['result'])
-        return linear_velocity, angualr_velocity
+        return linear_velocity, angular_velocity
 
 function calculate_goal_point:
         target_point = path[index]
@@ -91,8 +91,8 @@ function calculate_goal_point:
         return index
 
 function get_vff:
-        target_x = path[index].x - robot_position.x
-        target_y = path[index].y - robot_position.y
+        target_x = path[index][x] - robot_position[x]
+        target_y = path[index][y] - robot_position[y]
         vff_vector = {'attractive': [target_x , target_y],  # Goal-directed vector
                       'repulsive': [0.0, 0.0],  # Obstacle avoidance vector
                       'result': [0.0, 0.0]} # Combined vector
