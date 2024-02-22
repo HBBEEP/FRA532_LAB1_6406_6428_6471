@@ -59,8 +59,8 @@ def main(args=None):
     node = GlobalPlanner()
     goal_pose = PoseStamped()
     goal_pose.header.frame_id = "map"
-    goal_pose.pose.position.x =  5.0 #0.49637728929519653
-    goal_pose.pose.position.y =  5.0 #5.7008376121521
+    goal_pose.pose.position.x =  5.00 #0.496
+    goal_pose.pose.position.y =  5.00 #5.780
     node.send_goal(goal_pose)
     rclpy.spin(node)
     rclpy.shutdown()

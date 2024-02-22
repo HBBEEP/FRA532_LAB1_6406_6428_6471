@@ -34,7 +34,7 @@ class VelocityController(Node):
         self.wheel_omega = [0.0, 0.0]
         self.robot_twist = [0.0, 0.0]
         self.robot_position = [0.0, 0.0, 0.0] # x, y, theta
-        self.target_goal = [-3,1] #[1,0]
+        self.target_goal =  [1,0] #[-3,1]
         self.path = None
         self.current_pose_index = 0
         self.total_path = None
@@ -42,7 +42,7 @@ class VelocityController(Node):
         self.sent_linear_velocity = 0
         self.sent_angular_velocity = 0
         self.lookahead_distance = 1.00 # 0.40
-        self.goal_threshold = 0.15
+        self.goal_threshold = 0.2
         # < Global Variable
 
         # > Global Logic Variable
@@ -211,8 +211,8 @@ class VelocityController(Node):
         return self.current_pose_index
 
     def calculate_velocities(self, target):
-        max_linear_velocity = 0.40  # Maximum linear velocity
-        max_angular_velocity = 1.00  # Maximum angular velocity
+        max_linear_velocity = 0.30  # Maximum linear velocity # 0.30
+        max_angular_velocity = 0.90  # Maximum angular velocity # 0.90
         linear_velocity, angular_velocity = 0,0
         target_x = target[0]
         target_y = target[1]
@@ -228,7 +228,8 @@ class VelocityController(Node):
             linear_velocity = max_linear_velocity
             angular_velocity = w
             if angular_velocity > max_angular_velocity:
-                angular_velocity = max_angular_velocity
+                angular_velocity = max_angular_velocity # + 0.50
+                #linear_velocity /= 3.5
                 linear_velocity = 0.0
         else:
             linear_velocity = 0.0
@@ -260,19 +261,22 @@ class VelocityController(Node):
             angle = scan.angle_min + (scan.angle_increment * min_idx)
             opposite_angle = angle + math.pi
             complementary_dist  = OBSTACLE_DISTANCE - distance_min
-            gain_replusive = 5.00
+            gain_replusive = 2.00
             power_replusive = 2.00
-            vff_vector['repulsive'][0] = math.cos(opposite_angle) * ((complementary_dist * gain_replusive ) ** power_replusive)
-            vff_vector['repulsive'][1] = math.sin(opposite_angle) * ((complementary_dist * gain_replusive ) ** power_replusive)
+            bias_replusive = 0.50
+            vff_vector['repulsive'][0] = math.cos(opposite_angle) * ((complementary_dist * gain_replusive )**power_replusive) 
+            vff_vector['repulsive'][1] = math.sin(opposite_angle) * ((complementary_dist * gain_replusive )**power_replusive) 
 
         
         vff_vector['result'][0] = vff_vector['attractive'][0] + vff_vector['repulsive'][0]  
         vff_vector['result'][1] = vff_vector['attractive'][1] + vff_vector['repulsive'][1]   
-        if (~self.reach_flag and np.linalg.norm(vff_vector['result']) < 0.1 ):
-            vff_vector['result'][0] *= 10
-            vff_vector['result'][1] *= 10
-            
-        self.get_logger().info(f'>> {vff_vector}')
+        # if (~self.reach_flag and np.linalg.norm(vff_vector['result']) < 0.1 ):
+        #     vff_vector['repulsive'][0] *= 10
+        #     vff_vector['repulsive'][1] *= 10
+        #     vff_vector['result'][0] = vff_vector['attractive'][0] + vff_vector['repulsive'][0]  
+        #     vff_vector['result'][1] = vff_vector['attractive'][1] + vff_vector['repulsive'][1]   
+        temp_var = vff_vector['result']
+        self.get_logger().info(f'>> {temp_var}')
         return vff_vector
 
     # < Purepursuit + VFF --
