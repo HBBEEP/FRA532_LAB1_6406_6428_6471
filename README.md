@@ -134,7 +134,7 @@ Step 1: Clone the repository to the src directory of your workspace. You must un
 
 ```
 cd ~/[your_workspace]/src
-git clone [https://github.com/kkwxnn/self_balancing.git](https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471.git)
+git clone https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471.git
 ```
 Step 2:  Build a package in your workspace.
 ```
