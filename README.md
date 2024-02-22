@@ -4,8 +4,8 @@ This LAB is part of the FRA532 Mobile Robot course for third-year students at th
 
 ## Table of Contents
 
-- [Diagram]()
-- [Forward Kinematics]()
+- [Diagram](#Diagram)
+- [Forward Kinematics](#Forward_Kinematics)
 - [Inverse Kinematics]()
 - [Wheel Odometry]()
 - [Installation]()
@@ -15,7 +15,7 @@ This LAB is part of the FRA532 Mobile Robot course for third-year students at th
 
 ## Diagram
 
-## Forward Kinematics
+## Forward_Kinematics
 
 
 ```
@@ -27,7 +27,7 @@ This LAB is part of the FRA532 Mobile Robot course for third-year students at th
 ```
 
 
-## Inverse Kinematics
+## Inverse_Kinematics
 
 
 ```
