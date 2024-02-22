@@ -1,0 +1,150 @@
+controller_manager:
+  ros__parameters:
+
+    use_sim_time: true
+    
+    update_rate: 500 #Hz
+
+    # ur5_controller:
+    #   type: joint_trajectory_controller/JointTrajectoryController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    
+    diff_cont:
+      type: diff_drive_controller/DiffDriveController
+
+    velocity_controllers:
+      type: velocity_controllers/JointGroupVelocityController
+    
+    # gripper_controllers:
+    #   type: joint_trajectory_controller/JointTrajectoryController
+    
+    # gripper_vel_controllers:
+    #   type: velocity_controllers/JointGroupVelocityController
+
+    # force_torque_sensor_broadcaster:
+    #   type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+    
+    # manipulator_controllers:
+    #   type: velocity_controllers/JointGroupVelocityController
+
+# gripper_vel_controllers:
+#   ros__parameters:
+#     joints: 
+#       - finger_left_joint
+#       - finger_right_joint
+#     command_interface: 
+#       - velocity
+#     state_interface: 
+#       - velocity
+#       - effort
+
+# manipulator_controllers:
+#   ros__parameters:
+#     joints: 
+#       - shoulder_pan_joint
+#       - shoulder_lift_joint
+#       - elbow_joint
+#       - wrist_1_joint
+#       - wrist_2_joint
+#       - wrist_3_joint
+#     command_interface: 
+#       - velocity
+#     state_interface: 
+#       - velocity
+#       - effort
+
+
+velocity_controllers:
+  ros__parameters:
+    joints: 
+      - left_wheel_joint
+      - right_wheel_joint
+    command_interface: 
+      - velocity
+    state_interface: 
+      - velocity
+      - effort
+
+diff_cont:
+  ros__parameters:
+
+    publish_rate: 30.0 # You can set this higher than the controller manager update rate, but it will be throttled
+    base_frame_id: base_link
+
+    left_wheel_names: ['left_wheel_joint']
+    right_wheel_names: ['right_wheel_joint']
+    wheel_separation: 0.4
+    wheel_radius: 0.075
+
+    use_stamped_vel: false
+
+# ur5_controller:
+#   ros__parameters:
+#     joints:
+#       - shoulder_pan_joint
+#       - shoulder_lift_joint
+#       - elbow_joint
+#       - wrist_1_joint
+#       - wrist_2_joint
+#       - wrist_3_joint
+#       # - finger_left_joint
+#       # - finger_right_joint
+#       # - rg2_finger_left_joint
+#       # - rg2_finger_right_joint
+#     command_interfaces:
+#       - position
+#     state_interfaces:
+#       - position
+#       - velocity
+#       - effort
+#     state_publish_rate: 1000.0
+#     action_monitor_rate: 20.0
+#     allow_partial_joints_goal: false
+#     constraints:
+#       stopped_velocity_tolerance: 0.2
+#       goal_time: 0.0
+#       shoulder_pan_joint: { trajectory: 0.6, goal: 0.1 }
+#       shoulder_lift_joint: { trajectory: 0.6, goal: 0.1 }
+#       elbow_joint: { trajectory: 0.6, goal: 0.1 }
+#       wrist_1_joint: { trajectory: 0.6, goal: 0.1 }
+#       wrist_2_joint: { trajectory: 0.6, goal: 0.1 }
+#       wrist_3_joint: { trajectory: 0.6, goal: 0.1 }
+
+# gripper_controllers:
+#   ros__parameters:
+#     joints:
+#       - finger_left_joint
+#       - finger_right_joint
+#     command_interfaces:
+#       - position
+#     state_interfaces:
+#       - position
+#       - velocity
+#       - effort
+#     state_publish_rate: 100.0
+#     action_monitor_rate: 20.0
+#     allow_partial_joints_goal: false
+#     constraints:
+#       stopped_velocity_tolerance: 0.2
+#       goal_time: 0.0
+#       shoulder_pan_joint: { trajectory: 0.2, goal: 0.1 }
+#       shoulder_lift_joint: { trajectory: 0.2, goal: 0.1 }
+#       elbow_joint: { trajectory: 0.2, goal: 0.1 }
+#       wrist_1_joint: { trajectory: 0.2, goal: 0.1 }
+#       wrist_2_joint: { trajectory: 0.2, goal: 0.1 }
+#       wrist_3_joint: { trajectory: 0.2, goal: 0.1 }
+
+# force_torque_sensor_broadcaster:
+#   ros__parameters:
+#     sensor_name: tcp_fts_sensor
+#     state_interface_names:
+#       - force.x
+#       - force.y
+#       - force.z
+#       - torque.x
+#       - torque.y
+#       - torque.z
+#     frame_id: wrist_3_link
+#     topic_name: ft_data

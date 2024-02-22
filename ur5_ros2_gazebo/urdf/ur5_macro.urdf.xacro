@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+
+<!-- 
+
+# ===================================== COPYRIGHT ===================================== #
+#                                                                                       #
+#  IFRA (Intelligent Flexible Robotics and Assembly) Group, CRANFIELD UNIVERSITY        #
+#  Created on behalf of the IFRA Group at Cranfield University, United Kingdom          #
+#  E-mail: IFRA@cranfield.ac.uk                                                         #
+#                                                                                       #
+#  Licensed under the Apache-2.0 License.                                               #
+#  You may not use this file except in compliance with the License.                     #
+#  You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0  #
+#                                                                                       #
+#  Unless required by applicable law or agreed to in writing, software distributed      #
+#  under the License is distributed on an "as-is" basis, without warranties or          #
+#  conditions of any kind, either express or implied. See the License for the specific  #
+#  language governing permissions and limitations under the License.                    #
+#                                                                                       #
+#  IFRA Group - Cranfield University                                                    #
+#  AUTHORS: Mikel Bueno Viso - Mikel.Bueno-Viso@cranfield.ac.uk                         #
+#           Seemal Asif      - s.asif@cranfield.ac.uk                                   #
+#           Phil Webb        - p.f.webb@cranfield.ac.uk                                 #
+#                                                                                       #
+#  Date: July, 2022.                                                                    #
+#                                                                                       #
+# ===================================== COPYRIGHT ===================================== #
+
+# ===================================== COPYRIGHT ===================================== #
+#                                                                                       #
+#  Some of the information used to build the ROS2 UR5-Robot .urdf files in this ROS2    #
+#  repository has been taken from the following resources:                              #
+#       - Universal Robots ROS2 Description:                                            #
+#         https://github.com/UniversalRobots/Universal_Robots_ROS2_Description          #
+#       - Universal Robots ROS2 Gazebo Simulation:                                      #
+#         https://github.com/UniversalRobots/Universal_Robots_ROS2_Gazebo_Simulation    #
+#                                                                                       #
+#  AUTHORS:                                                                             #
+#       - ROS-Industrial - https://rosindustrial.org                                    #
+#       - Universal Robots - https://github.com/UniversalRobots                         #
+#       - Nadia Hammoudeh Garcia, Kelsey Hawkins, G.A. vd. Hoorn, Lovro Ivanov, Mathias #
+#         Ludtke, Wim Meeussen, Felix Messmer, Miguel Prada Sarasola, Denis Stogl,      #
+#         Andy Zelenak, Marvin Grosse Besselmann.                                       #
+#       - Maintainers: Felix Exner (exner@fzi.de), Tristan Schnell (schnell@fzi.de),    #
+#         Lovro Ivanov (lovro.ivanov@gmail.com), Denis Stogl (denis@stoglrobotics.de).  #
+#                                                                                       #
+#  Copyright (c) 2021, Universal Robots A/S                                             #
+#  (ORIGINAL LICENSE) -> Licensed under the BSD 3-Clause License.                       #
+#                                                                                       #
+#  CHANGES MADE:                                                                        #
+#  Robot information/specifications have been taken, and the code has been modified and #
+#  re-organised in accordance with the ros2_RobotSimulation standards.                  #
+#                                                                                       #
+# ===================================== COPYRIGHT ===================================== #
+
+# ======= CITE OUR WORK ======= #
+# You can cite our work with the following statement:
+# IFRA (2022) ROS2.0 ROBOT SIMULATION. URL: https://github.com/IFRA-Cranfield/ros2_RobotSimulation.
+
+-->
+
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- XACRO-MACRO of UR5 ROBOT: -->
+  <xacro:macro name="ur5" params="prefix EE_no safety_limits safety_pos_margin safety_k_position">
+  
+    <!-- Load UR5 ROBOT TRANSMISSION file: -->
+    <xacro:include filename="$(find ur5_ros2_gazebo)/urdf/ur5_transmission.xacro" />
+    <xacro:ur5_transmission 
+      prefix=""
+    />
+    
+    <!-- Load UR5 ROBOT ROS2_CONTROL file: -->
+    <xacro:include filename="$(find ur5_ros2_gazebo)/urdf/ur5_ros2control.xacro" />
+    <xacro:ur5_ros2control 
+      prefix=""
+      EE_no="${EE_no}"
+    />
+
+    <!-- Load UR5 SPECIFICATIONS file: -->
+    <xacro:include filename="$(find ur5_ros2_gazebo)/urdf/ur5_common.xacro" />
+    <xacro:include filename="$(find ur5_ros2_gazebo)/urdf/inertial_macros.xacro" />
+    <xacro:ur5_common/>
+
+    <!-- <gazebo reference="chassis">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Orange</material>
+    </gazebo> -->
+
+    <!-- ***** ur5 ROBOT .urdf SERIAL CHAIN *****-->
+    <!-- Links: -->
+    <link name="${prefix}base_link"/>
+    <link name="${prefix}chassis">
+      <visual>
+          <!-- <origin xyz="${chassis_length/2} 0 ${chassis_height/2}"/> -->
+          <origin xyz="${chassis_length/2} 0 -0.10"/>
+          <!-- <geometry>
+              <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+          </geometry> -->
+          <geometry>
+            <mesh filename="file://$(find ur5_ros2_gazebo)/meshes/visual/mir_100_base.stl"/>
+          </geometry>
+          <material name="LightGrey"/>
+      </visual>
+      <collision>
+          <!-- <origin xyz="${chassis_length/2} 0 ${chassis_height/2}"/> -->
+          <origin xyz="${chassis_length/2} 0 -0.10"/>
+          <!-- <geometry>
+              <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+          </geometry> -->
+          <geometry>
+            <mesh filename="file://$(find ur5_ros2_gazebo)/meshes/collision/mir_100_base.stl"/>
+          </geometry>
+      </collision>
+      <xacro:inertial_box mass="100" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+          <origin xyz="${chassis_length/2} 0 ${chassis_height/2}" rpy="0 0 0"/>
+      </xacro:inertial_box>
+    </link>
+    <link name="${prefix}left_wheel">
+      <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+    <link name="${prefix}right_wheel">
+      <visual>
+          <geometry>
+              <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+          </geometry>
+          <material name="blue"/>
+      </visual>
+      <collision>
+          <geometry>
+              <sphere radius="${wheel_radius}"/>
+          </geometry>
+      </collision>
+      <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:inertial_cylinder>
+    </link>
+    <link name="${prefix}caster_wheel_f_r">
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${caster_wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+    <link name="${prefix}caster_wheel_f_l">
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${caster_wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+    <link name="${prefix}caster_wheel_r_r">
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${caster_wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+    <link name="${prefix}caster_wheel_r_l">
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${caster_wheel_radius}">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_sphere>
+    </link>
+
+    <!-- Joints: -->
+    <joint name="${prefix}chassis_joint" type="fixed">
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}chassis"/>
+      <origin xyz="${-wheel_offset_x} 0 ${-wheel_offset_z}"/>
+    </joint>
+    <joint name="${prefix}right_wheel_joint" type="continuous">
+        <parent link="${prefix}base_link"/>
+        <child link="${prefix}right_wheel"/>
+        <origin xyz="0 ${-wheel_offset_y} 0" rpy="${pi/2} 0 0" />
+        <axis xyz="0 0 -1"/>
+    </joint>
+    <joint name="${prefix}left_wheel_joint" type="continuous">
+        <parent link="${prefix}base_link"/>
+        <child link="${prefix}left_wheel"/>
+        <origin xyz="0 ${wheel_offset_y} 0" rpy="-${pi/2} 0 0" />
+        <axis xyz="0 0 1"/>
+    </joint>
+    <joint name="caster_wheel_f_r_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="caster_wheel_f_r"/>
+        <origin xyz="${caster_wheel_offset_x} ${caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
+    </joint>
+    <joint name="caster_wheel_f_l_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="caster_wheel_f_l"/>
+        <origin xyz="${caster_wheel_offset_x} ${-caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
+    </joint>
+    <joint name="caster_wheel_r_r_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="caster_wheel_r_r"/>
+        <origin xyz="${-caster_wheel_offset_x} ${caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
+    </joint>
+    <joint name="caster_wheel_r_l_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="caster_wheel_r_l"/>
+        <origin xyz="${-caster_wheel_offset_x} ${-caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
+    </joint>
+
+    <link name="${prefix}base"/>
+    <joint name="${prefix}base_link-base_fixed_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}base"/>
+    </joint>
+
+    <!-- Laser  -->
+    <joint name="laser_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="laser_frame"/>
+        <origin xyz="0.122 0 0.312" rpy="0 0 0"/>
+    </joint>
+
+    <link name="laser_frame">
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.04"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <visual>
+            <origin xyz="0 0 -0.05"/>
+            <geometry>
+                <cylinder radius="0.01" length="0.1"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.04"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="0.1" length="0.04" radius="0.05">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+
+    <gazebo reference="laser_frame">
+        <material>Gazebo/Black</material>
+
+        <sensor name="laser" type="ray">
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>false</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12</max>
+                </range>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <argument>~/out:=scan</argument>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>laser_frame</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <!-- Camera -->
+
+    <joint name="camera_joint" type="fixed">
+        <parent link="base"/> <!-- <parent link="tool0"/> -->
+        <child link="camera_link"/>
+        <origin xyz="-0.45 0 0.2" rpy="0 ${pi} 0"/>
+    </joint>
+
+    <link name="camera_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+          <geometry>
+            <mesh filename="file://$(find ur5_ros2_gazebo)/meshes/visual/d455.stl" scale="0.001 0.001 0.001"/>
+          </geometry>
+          <!-- <material name="red"/> -->
+        </visual>
+    </link>
+
+  
+    <joint name="camera_optical_joint" type="fixed">
+        <parent link="camera_link"/>
+        <child link="camera_link_optical"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+
+    <link name="camera_link_optical"></link>
+
+    <gazebo reference="camera_link">
+        <!-- <material>Gazebo/Red</material> -->
+
+        <sensor name="camera" type="depth">
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <camera>
+                <horizontal_fov>1.089</horizontal_fov>
+                <image>
+                    <format>B8G8R8</format>
+                    <width>640</width>
+                    <height>480</height>
+                </image>
+                <clip>
+                    <near>0.05</near>
+                    <far>8.0</far>
+                </clip>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <frame_name>camera_link_optical</frame_name>
+                <min_depth>0.1</min_depth>
+                <max_depth>100.0</max_depth>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="groud_truth_pose" filename="libgazebo_ros_p3d.so">
+        <always_on>true</always_on>
+        <update_rate>50.0</update_rate>
+        <body_name>base_link</body_name>
+        <topic_name>odom</topic_name>
+        <gaussian_noise>0.00</gaussian_noise>
+        <frame_name>world</frame_name>
+        <tf_frame_name>world</tf_frame_name>
+        <tf_prefix>odom_groud_truth_pose</tf_prefix>
+        <xyz_offset>0 0 0</xyz_offset>
+        <rpy_offset>0 0 0</rpy_offset>
+        <ros>
+            <remapping>/odom:=odom_groud_truth_pose</remapping>
+        </ros>
+      </plugin>
+    </gazebo>
+
+  </xacro:macro>
+</robot>
