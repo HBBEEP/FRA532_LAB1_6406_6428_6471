@@ -177,7 +177,9 @@ Result:
 
 
 
-https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/1f3becfe-ab98-43d7-ba81-4bc1feb8bb1f
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/75566343/d0a90fcc-5fb0-4ddf-99bc-326c494ed971
+
+
 
 
 
@@ -190,7 +192,9 @@ Result:
 
 
 
-https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/122891621/888a0add-1839-4174-8c27-c3eb5b57e9fa
+
+https://github.com/HBBEEP/FRA532_LAB1_6406_6428_6471/assets/75566343/dafc0139-072f-4d33-9ee6-03b846f70d05
+
 
 
 
