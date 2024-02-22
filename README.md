@@ -107,6 +107,7 @@ function get_vff:
         end
         vff_vector['result'][0] = vff_vector['attractive'][0] + vff_vector['repulsive'][0]
         vff_vector['result'][1] = vff_vector['attractive'][1] + vff_vector['repulsive'][1]
+        return vff_vector
 
 function calculate_velocities:
         target_x = vff_vector['result'][0]
