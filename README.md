@@ -220,6 +220,12 @@ ros2 launch multi_turtlebot_sim spawn_testcase_6.launch.py
 ```
 Result:
 
+Test Case 7: 2 Dynamics Obstacles with increase speed
+
+```
+ros2 launch multi_turtlebot_sim spawn_testcase_7.launch.py
+```
+Result:
 
 
 
