@@ -166,7 +166,7 @@ ros2 run robot_control global_planner.py
 ```
 ros2 launch multi_turtlebot_sim spawn_environment.launch.py
 ```
-### Launch Test Case (Launch before run velocity_controller)
+### Launch Test Case (Launch before run global planner)
 
 Test Case 1: No Obstacle
 
